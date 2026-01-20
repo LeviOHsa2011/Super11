@@ -1,0 +1,24 @@
+{
+  "name": "super11",
+  "version": "1.0.0",
+  "description": "Minimalist Open Source Browser for chocolateOS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "LeviOHsa11",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.super11.mini",
+    "productName": "Super11",
+    "win": {
+      "target": "portable",
+      "icon": "icon_super.png"
+    }
+  }
+}

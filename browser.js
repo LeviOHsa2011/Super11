@@ -7,7 +7,6 @@ function createNewTab() {
     tabIdCounter++;
     const id = `tab-${tabIdCounter}`;
 
-    // Tab Button
     const tabBtn = document.createElement('div');
     tabBtn.className = 'tab';
     tabBtn.id = `btn-${id}`;
@@ -18,7 +17,6 @@ function createNewTab() {
     `;
     tabBar.insertBefore(tabBtn, document.getElementById('add-tab'));
 
-    // View Container
     const container = document.createElement('div');
     container.className = 'view-container';
     container.id = `view-${id}`;
@@ -28,9 +26,16 @@ function createNewTab() {
             <input type="text" class="search-box" placeholder="Was willst du entdecken?" 
                    onkeypress="if(event.key === 'Enter') navigate('${id}', this.value)">
         </div>
-        <iframe class="browser-frame" id="frame-${id}"></iframe>
+        <webview class="browser-frame" id="frame-${id}" style="display:none;"></webview>
     `;
     contentWrapper.appendChild(container);
+
+    const webview = document.getElementById(`frame-${id}`);
+    webview.addEventListener('did-stop-loading', () => {
+        if (document.getElementById(`view-${id}`).classList.contains('active')) {
+            urlInput.value = webview.getURL();
+        }
+    });
 
     switchTab(id);
 }
@@ -45,17 +50,19 @@ function switchTab(id) {
     if(activeBtn && activeView) {
         activeBtn.classList.add('active');
         activeView.classList.add('active');
-        const frame = document.getElementById(`frame-${id}`);
-        urlInput.value = (frame.style.display === 'block') ? frame.src : "";
+        const webview = document.getElementById(`frame-${id}`);
+        urlInput.value = (webview.style.display === 'flex') ? webview.getURL() : "";
     }
 }
 
 function navigate(id, query) {
     const home = document.getElementById(`home-${id}`);
-    const frame = document.getElementById(`frame-${id}`);
+    const webview = document.getElementById(`frame-${id}`);
     const tabBtnText = document.querySelector(`#btn-${id} span`);
     let url = query.trim();
     
+    if (url === "") return;
+
     if (!url.includes('.') && !url.startsWith('http')) {
         url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
     } else if (!url.startsWith('http')) {
@@ -63,10 +70,10 @@ function navigate(id, query) {
     }
 
     home.style.display = 'none';
-    frame.style.display = 'block';
-    frame.src = url;
+    webview.style.display = 'flex';
+    webview.src = url;
     urlInput.value = url;
-    tabBtnText.innerText = query.substring(0, 12) + (query.length > 12 ? '...' : '');
+    tabBtnText.innerText = query.substring(0, 12);
 }
 
 function removeTab(id) {
@@ -83,21 +90,26 @@ function removeTab(id) {
     if (document.querySelectorAll('.tab').length === 0) createNewTab();
 }
 
-// Controls
+function goBack() {
+    const activeWebview = document.querySelector('.view-container.active webview');
+    if (activeWebview && activeWebview.canGoBack()) activeWebview.goBack();
+}
+
+function goForward() {
+    const activeWebview = document.querySelector('.view-container.active webview');
+    if (activeWebview && activeWebview.canGoForward()) activeWebview.goForward();
+}
+
 function reloadPage() {
-    const activeView = document.querySelector('.view-container.active .browser-frame');
-    if (activeView) activeView.src = activeView.src;
+    const activeWebview = document.querySelector('.view-container.active webview');
+    if (activeWebview) activeWebview.reload();
 }
 
 urlInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         const activeContainer = document.querySelector('.view-container.active');
-        if (activeContainer) {
-            const id = activeContainer.id.replace('view-', '');
-            navigate(id, urlInput.value);
-        }
+        if (activeContainer) navigate(activeContainer.id.replace('view-', ''), urlInput.value);
     }
 });
 
-// Init
 createNewTab();

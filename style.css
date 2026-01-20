@@ -18,7 +18,6 @@ body, html {
     overflow: hidden;
 }
 
-/* --- TAB SYSTEM --- */
 #tab-bar {
     display: flex;
     background: var(--tab-bar-bg);
@@ -63,7 +62,6 @@ body, html {
     color: #86868b;
 }
 
-/* --- NAVIGATION --- */
 #nav-bar {
     display: flex;
     padding: 10px 15px;
@@ -93,21 +91,26 @@ body, html {
     outline: none;
 }
 
-/* --- CONTENT AREA & STARTPAGE --- */
-#content-wrapper { flex-grow: 1; position: relative; }
+#content-wrapper { 
+    flex: 1; 
+    position: relative; 
+    background: #ffffff;
+}
 
 .view-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     display: none;
-    position: absolute;
     flex-direction: column;
 }
 
 .view-container.active { display: flex; }
 
 .startpage {
-    flex-grow: 1;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -135,8 +138,10 @@ body, html {
 }
 
 .browser-frame {
+    flex: 1;
     width: 100%;
     height: 100%;
     border: none;
-    display: none;
+    margin: 0;
+    padding: 0;
 }
