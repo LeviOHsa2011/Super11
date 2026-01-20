@@ -7,7 +7,7 @@ function createWindow() {
         height: 700,
         minWidth: 800,
         minHeight: 600,
-        icon: path.join(__dirname, 'icon_super.png'),
+        icon: path.join(__dirname, 'platzhalter.png'),
         frame: true, 
         webPreferences: {
             nodeIntegration: true,
@@ -39,3 +39,4 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 
 });
+
