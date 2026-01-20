@@ -5,6 +5,7 @@ Super11 ist die minimalistische Open-Source-Edition des ULTRA11 Browsers von Lev
 ## Features
 - Light Mode Design
 - Natives Tab-System
+- Optimiert für chocolateOS Kernel
 - Geringer Ressourcenverbrauch
 
 ## Installation
@@ -17,5 +18,4 @@ Für eine portable Windows-Version:
 npm run build
 
 ## Lizenz
-
 ISC

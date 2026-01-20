@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super11 Mini Browser</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="tab-bar">
+        <div id="add-tab" onclick="createNewTab()">+</div>
+    </div>
+
+    <nav id="nav-bar">
+        <div class="brand-logo">S11</div>
+        <div class="nav-controls">
+            <button onclick="goBack()">◀</button>
+            <button onclick="goForward()">▶</button>
+            <button onclick="reloadPage()">↻</button>
+        </div>
+        <input type="text" id="url-input" placeholder="Suche oder URL eingeben...">
+    </nav>
+
+    <main id="content-wrapper">
+        </main>
+
+    <script src="browser.js"></script>
+</body>
+</html>
