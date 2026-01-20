@@ -16,6 +16,11 @@ function createWindow() {
         }
     });
 
+    win.webContents.on('before-input-event', (event, input) => {
+  if (input.key === 'F12') {
+    win.webContents.toggleDevTools()
+  }
+})
     
     win.setMenuBarVisibility(false);
 
@@ -32,4 +37,5 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
+
 });
