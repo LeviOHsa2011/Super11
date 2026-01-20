@@ -18,7 +18,8 @@
     "productName": "Super11",
     "win": {
       "target": "portable",
-      "icon": "icon_super.png"
+      "icon": "placeholder.png"
     }
   }
+
 }
