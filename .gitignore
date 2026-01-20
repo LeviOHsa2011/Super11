@@ -1,0 +1,12 @@
+# Abhängigkeiten
+node_modules/
+
+# Build-Dateien (Electron)
+dist/
+
+# Betriebssystem-Spezifisches
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
